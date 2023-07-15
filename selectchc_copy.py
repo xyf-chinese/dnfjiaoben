@@ -1098,7 +1098,53 @@ def t17controll(cha_type):
                     if fanhui_flg ==1:
                        fanhui_res = fanhui()
                        if fanhui_res==1:
-                          return                                                                             
+                          return  
+
+#角色18刷图 n           
+def t18controll(cha_type):
+        global shenyuan_flg 
+        global pilaofuzu_flg
+        pyautogui.click(975,570)
+        time.sleep(1)
+        pyautogui.click(975,570)
+        time.sleep(1) 
+        pyautogui.click(945,900)
+        time.sleep(1)
+        pyautogui.click(945,900)
+        time.sleep(15)
+        pilao_flg = pilao0_check()
+        if pilao_flg == 0:
+            re_main()            
+        elif pilao_flg ==1 :
+            xiuli() 
+            dugeon_in()
+            shanji_in()
+            while True:
+             for img in shuatu_files:
+                 img_name,img_ext = os.path.splitext(img)
+                 img_path = os.path.join(shuatu_path, img)
+                 if shenyuan_flg ==1:
+                    shenyuanfanhuires = shenyuanfanhui()#遇到深渊返回
+                    if shenyuanfanhuires == 1:
+                       time.sleep(5)
+                       shenyuan_flg = 0
+                       pilaobuzu()
+                       time.sleep(10)
+                       break
+                    else:    
+                       pass
+                    shenyuan_flg =0
+                    continue                   
+                 if img_name == 're':                    
+                    fanhui_flg = re_in(img_path,cha_type) #0为有疲劳 1为空疲劳返回
+                    if cha_type==1: #选择攻击模式
+                     sattack()
+                    elif cha_type==0:
+                     nattack()                       
+                    if fanhui_flg ==1:
+                       fanhui_res = fanhui()
+                       if fanhui_res==1:
+                          return                                                                                                     
                                                                                                                
                                                          
 def jiaobenyunxing(chc_num):
@@ -1271,7 +1317,21 @@ def jiaobenyunxing(chc_num):
       cha_type=0    
       t17controll(cha_type)
       chc_n += 1      
-             
+
+   if chc_n ==18: #角色18
+      pyautogui.moveTo(960,550) #鼠标回到中央
+      time.sleep(1)
+      pyautogui.scroll(-1) 
+      time.sleep(5)        
+      pyautogui.scroll(-1) 
+      time.sleep(5)
+      pyautogui.scroll(-1) 
+      time.sleep(5)      
+      cha_type=0    
+      t18controll(cha_type)
+      chc_n += 1     
+
+
    time.sleep(5)
    os.system('D:/bianchengruanjian/ADB/platform-tools/adb shell input keyevent 26')   
    time.sleep(300)
